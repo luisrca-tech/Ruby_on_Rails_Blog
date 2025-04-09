@@ -1,0 +1,20 @@
+development:
+  cloud_name: "dt3txq9jn"          
+  api_key: "123794531415865"
+  api_secret: "E_OY_01Zohnu3zdLFzlhH5NzayE"
+  secure: true
+  folder: "my_blog_development"
+
+test:
+  cloud_name: "dt3txq9jn"
+  api_key: "123794531415865"
+  api_secret: "E_OY_01Zohnu3zdLFzlhH5NzayE"
+  secure: true
+  folder: "my_blog_test"
+
+production:
+  cloud_name: "dt3txq9jn"
+  api_key: "123794531415865"
+  api_secret: "E_OY_01Zohnu3zdLFzlhH5NzayE"
+  secure: true
+  folder: "my_blog_production" 

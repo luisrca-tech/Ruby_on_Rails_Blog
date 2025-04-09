@@ -1,15 +1,43 @@
-<div class="container">
-  <div class="page-header">
-    <h1 class="page-title">Blog Posts</h1>
-    <div class="post-actions">
-      <%= link_to "My Posts", my_posts_path, class: "btn btn-primary" %>
-      <%= link_to "New Post", new_post_path, class: "btn btn-success" %>
+<div class="posts-container">
+  <div class="posts-header">
+    <h1 class="posts-title">Blog Posts</h1>
+    <div class="posts-header-actions">
+      <%= link_to "My Posts", my_posts_path, class: "btn btn-secondary" %>
+      <%= link_to "New Post", new_post_path, class: "btn btn-primary" %>
     </div>
   </div>
 
-  <div class="posts-list">
+  <div class="posts-grid">
     <% @posts.each do |post| %>
-      <%= render partial: "posts/post_template", locals: { post: post } %>
+      <div class="post-card">
+        <% if post.image.attached? %>
+          <div class="post-card-image">
+            <%= link_to post_path(post) do %>
+              <%= image_tag post.image %>
+            <% end %>
+          </div>
+        <% end %>
+        <div class="post-card-content">
+          <div class="post-card-meta">
+            <span class="post-date">Posted <%= time_ago_in_words(post.created_at) %> ago</span>
+            <span class="post-author">by <%= post.user.email %></span>
+          </div>
+          <h2 class="post-card-title">
+            <%= link_to post.title, post_path(post), class: "post-card-title-link" %>
+          </h2>
+          <p class="post-card-excerpt">
+            <%= truncate(post.description, length: 250) %>
+          </p>
+          <div class="post-card-actions">
+            <%= link_to "Read More", post_path(post), class: "btn btn-primary" %>
+            <% if user_signed_in? && current_user == post.user %>
+              <%= link_to "Edit", edit_post_path(post), class: "btn btn-secondary" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
     <% end %>
   </div>
 </div>
+
+

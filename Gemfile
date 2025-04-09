@@ -66,3 +66,13 @@ group :test do
 end
 
 gem "tailwindcss-rails", "~> 4.2"
+
+# Cloudinary for image storage
+gem 'cloudinary'
+
+# Environment variables
+gem 'dotenv-rails', groups: [:development, :test]
+
+# Admin interface (commented out until needed)
+# gem 'activeadmin'
+# gem 'sassc-rails'

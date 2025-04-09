@@ -1,16 +1,37 @@
-<div class="container">
-  <div class="page-header">
-    <h1 class="page-title">My Posts</h1>
-    <div class="post-actions">
-      <%= link_to "All Posts", posts_path, class: "btn btn-primary" %>
-      <%= link_to "New Post", new_post_path, class: "btn btn-success" %>
+<div class="posts-container">
+  <div class="posts-header">
+    <h1 class="posts-title">My Posts</h1>
+    <div class="posts-header-actions">
+      <%= link_to "All Posts", posts_path, class: "btn btn-secondary" %>
+      <%= link_to "New Post", new_post_path, class: "btn btn-primary" %>
     </div>
   </div>
 
-  <div class="posts-list">
+  <div class="posts-grid">
     <% if @posts.any? %>
       <% @posts.each do |post| %>
-        <%= render partial: "posts/post_template", locals: { post: post } %>
+        <div class="post-card">
+          <% if post.image.attached? %>
+            <div class="post-card-image">
+              <%= link_to post_path(post) do %>
+                <%= image_tag post.image %>
+              <% end %>
+            </div>
+          <% end %>
+          <div class="post-card-content">
+            <h2 class="post-card-title"><%= post.title %></h2>
+            <p class="post-card-excerpt"><%= post.description %></p>
+            <div class="post-card-meta">
+              <span class="post-date">Posted <%= time_ago_in_words(post.created_at) %> ago</span>
+            </div>
+            <p class="post-card-excerpt"><%= truncate(post.body, length: 150) %></p>
+            <div class="post-card-actions">
+              <%= link_to "Read More", post_path(post), class: "btn btn-primary" %>
+              <%= link_to "Edit", edit_post_path(post), class: "btn btn-secondary" %>
+              <%= button_to "Delete", post_path(post), method: :delete, class: "btn btn-danger", form: { data: { turbo_confirm: "Are you sure?" } } %>
+            </div>
+          </div>
+        </div>
       <% end %>
     <% else %>
       <div class="empty-state">
