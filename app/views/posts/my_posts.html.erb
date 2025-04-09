@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="page-header">
+    <h1 class="page-title">My Posts</h1>
+    <div class="post-actions">
+      <%= link_to "All Posts", posts_path, class: "btn btn-primary" %>
+      <%= link_to "New Post", new_post_path, class: "btn btn-success" %>
+    </div>
+  </div>
+
+  <div class="posts-list">
+    <% if @posts.any? %>
+      <% @posts.each do |post| %>
+        <%= render partial: "posts/post_template", locals: { post: post } %>
+      <% end %>
+    <% else %>
+      <div class="empty-state">
+        <p class="empty-state-text">You haven't created any posts yet.</p>
+        <%= link_to "Create your first post", new_post_path, class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

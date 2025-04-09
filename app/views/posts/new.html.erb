@@ -1,0 +1,10 @@
+<div class="container">
+  <div class="form-container">
+    <h1 class="form-title">New Post</h1>
+    <%= render partial: "posts/form", locals: { post: @post } %>
+  </div>
+  
+  <div class="text-center mt-4">
+    <%= link_to 'Back to Posts', posts_path, class: "btn btn-primary" %>
+  </div>
+</div>

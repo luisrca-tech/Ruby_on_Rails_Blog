@@ -1,0 +1,24 @@
+<div class="post-card">
+  <div class="post-header">
+    <h2 class="post-title"><%= post.title %></h2>
+    <span class="post-meta"><%= time_ago_in_words(post.created_at) %> ago</span>
+  </div>
+  
+  <p class="post-content"><%= post.description %></p>
+  
+  <div class="post-footer">
+    <div class="post-author">
+      <div class="author-avatar">
+        <%= post.user.email.first.upcase %>
+      </div>
+      <span class="author-name"><%= post.user.email %></span>
+    </div>
+    
+    <% if current_user.id == post.user.id %>
+      <div class="post-actions">
+        <%= link_to "Edit", edit_post_path(post.id), class: "action-btn action-btn-edit" %>
+        <%= button_to "Delete", post, method: :delete, class: "action-btn action-btn-delete", form: { data: { turbo_confirm: "Are you sure?" } } %>
+      </div>
+    <% end %>
+  </div>
+</div>
